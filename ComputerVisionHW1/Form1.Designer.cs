@@ -41,8 +41,8 @@
             this.ProcessButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.XMovement = new System.Windows.Forms.TextBox();
+            this.YMovement = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.MainPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             this.SuspendLayout();
@@ -142,6 +142,7 @@
             this.ProcessButton.TabIndex = 9;
             this.ProcessButton.Text = "開始處理";
             this.ProcessButton.UseVisualStyleBackColor = true;
+            this.ProcessButton.Click += new System.EventHandler(this.ProcessButton_Click);
             // 
             // label1
             // 
@@ -163,27 +164,27 @@
             this.label2.TabIndex = 11;
             this.label2.Text = "縱向平移:";
             // 
-            // textBox1
+            // XMovement
             // 
-            this.textBox1.Location = new System.Drawing.Point(121, 143);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(55, 20);
-            this.textBox1.TabIndex = 12;
+            this.XMovement.Location = new System.Drawing.Point(121, 143);
+            this.XMovement.Name = "XMovement";
+            this.XMovement.Size = new System.Drawing.Size(55, 20);
+            this.XMovement.TabIndex = 12;
             // 
-            // textBox2
+            // YMovement
             // 
-            this.textBox2.Location = new System.Drawing.Point(121, 178);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(55, 20);
-            this.textBox2.TabIndex = 13;
+            this.YMovement.Location = new System.Drawing.Point(121, 178);
+            this.YMovement.Name = "YMovement";
+            this.YMovement.Size = new System.Drawing.Size(55, 20);
+            this.YMovement.TabIndex = 13;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(912, 445);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.YMovement);
+            this.Controls.Add(this.XMovement);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.ProcessButton);
@@ -197,7 +198,7 @@
             this.Controls.Add(this.TurnBlackButton);
             this.Controls.Add(this.MainPictureBox);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "ComputerVisionHW1";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.MainPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();
@@ -219,8 +220,8 @@
         private System.Windows.Forms.Label RotateVariableLable;
         private System.Windows.Forms.TextBox RotateVariable;
         private System.Windows.Forms.Button ProcessButton;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox YMovement;
+        private System.Windows.Forms.TextBox XMovement;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
     }
