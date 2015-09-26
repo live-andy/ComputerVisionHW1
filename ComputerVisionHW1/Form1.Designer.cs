@@ -35,7 +35,7 @@
             this.WidthVariableLabel = new System.Windows.Forms.Label();
             this.WidthVariable = new System.Windows.Forms.TextBox();
             this.HeighVariableLabel = new System.Windows.Forms.Label();
-            this.HeighVariable = new System.Windows.Forms.TextBox();
+            this.HeightVariable = new System.Windows.Forms.TextBox();
             this.RotateVariable = new System.Windows.Forms.TextBox();
             this.RotateVariableLable = new System.Windows.Forms.Label();
             this.ProcessButton = new System.Windows.Forms.Button();
@@ -109,12 +109,13 @@
             this.HeighVariableLabel.TabIndex = 5;
             this.HeighVariableLabel.Text = "拉申高度:";
             // 
-            // HeighVariable
+            // HeightVariable
             // 
-            this.HeighVariable.Location = new System.Drawing.Point(120, 257);
-            this.HeighVariable.Name = "HeighVariable";
-            this.HeighVariable.Size = new System.Drawing.Size(56, 20);
-            this.HeighVariable.TabIndex = 6;
+            this.HeightVariable.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.HeightVariable.Location = new System.Drawing.Point(120, 257);
+            this.HeightVariable.Name = "HeightVariable";
+            this.HeightVariable.Size = new System.Drawing.Size(56, 20);
+            this.HeightVariable.TabIndex = 6;
             // 
             // RotateVariable
             // 
@@ -190,7 +191,7 @@
             this.Controls.Add(this.ProcessButton);
             this.Controls.Add(this.RotateVariableLable);
             this.Controls.Add(this.RotateVariable);
-            this.Controls.Add(this.HeighVariable);
+            this.Controls.Add(this.HeightVariable);
             this.Controls.Add(this.HeighVariableLabel);
             this.Controls.Add(this.WidthVariable);
             this.Controls.Add(this.WidthVariableLabel);
@@ -215,7 +216,7 @@
         private System.IO.FileSystemWatcher fileSystemWatcher1;
         private System.Windows.Forms.Label WidthVariableLabel;
         private System.Windows.Forms.TextBox WidthVariable;
-        private System.Windows.Forms.TextBox HeighVariable;
+        private System.Windows.Forms.TextBox HeightVariable;
         private System.Windows.Forms.Label HeighVariableLabel;
         private System.Windows.Forms.Label RotateVariableLable;
         private System.Windows.Forms.TextBox RotateVariable;

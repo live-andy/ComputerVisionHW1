@@ -71,9 +71,29 @@ namespace ComputerVisionHW1
 
         private void ProcessButton_Click(object sender, EventArgs e)
         {
-            Bitmap bm2 = (Bitmap)MainPictureBox.Image;
+            Bitmap OriginalBitmap = (Bitmap)MainPictureBox.Image;
+            //int XMovementData = Convert.ToInt32(XMovement.Text);
+            //int YMovementData = Convert.ToInt32(YMovement.Text);
+            double WidthData = Convert.ToDouble(WidthVariable.Text);
+            double HeightData = Convert.ToDouble(HeightVariable.Text);
+            int NewPictureWidth = Convert.ToInt32(WidthData);
+            int NewPictureHeight = Convert.ToInt32(HeightData);
+            Bitmap NewBitmap = new Bitmap(NewPictureWidth,NewPictureHeight);
+            for(int i = 0; i < NewPictureWidth; i++)
+            {
+                for(int j = 0; j < NewPictureHeight; j++)
+                {
+                    Color OriginalColor = OriginalBitmap.GetPixel(i, j);
+                    /*int Red = OriginalColor.R;
+                    int Green = OriginalColor.G;
+                    int Blue = OriginalColor.B;*/
+                    //NewBitmap.SetPixel(i,j, Color.FromArgb(avg1, avg1, avg1)));
+                    NewBitmap.SetPixel(i, j, OriginalColor);
+        }
+            }
+            /*Send image to form2*/
             Form2 newForm = new Form2();
-            newForm.Form2GetImage(bm2);
+            newForm.Form2GetImage(NewBitmap);
             newForm.Show();
         }
     }
