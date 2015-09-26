@@ -68,5 +68,13 @@ namespace ComputerVisionHW1
                 MainPictureBox.Image = Image.FromFile(LoadImageDialog.FileName);
             }
         }
+
+        private void ProcessButton_Click(object sender, EventArgs e)
+        {
+            Bitmap bm2 = (Bitmap)MainPictureBox.Image;
+            Form2 newForm = new Form2();
+            newForm.Form2GetImage(bm2);
+            newForm.Show();
+        }
     }
 }

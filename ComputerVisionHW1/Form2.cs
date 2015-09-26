@@ -16,5 +16,9 @@ namespace ComputerVisionHW1
         {
             InitializeComponent();
         }
+        public void Form2GetImage(Bitmap InputImage)
+        {
+            ResultPictureBox.Image = InputImage;
+        }
     }
 }
