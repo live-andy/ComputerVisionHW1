@@ -104,8 +104,10 @@ namespace ComputerVisionHW1
                 }
             }
             //旋轉
+            if(RotateVariable.Text != "")
+            {
 
-
+            }
             //平移
             int XMovementData = 0;
             int YMovementData = 0;
