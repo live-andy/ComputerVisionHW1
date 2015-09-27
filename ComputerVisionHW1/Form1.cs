@@ -107,8 +107,9 @@ namespace ComputerVisionHW1
 
 
             //平移
-            int XMovementData;
-            int YMovementData;
+            int XMovementData = 0;
+            int YMovementData = 0;
+            Color Black = Color.FromArgb(0, 0, 0);
             if (XMovement.Text != "")
             {
                 XMovementData = Convert.ToInt32(XMovement.Text);
@@ -117,9 +118,26 @@ namespace ComputerVisionHW1
             {
                 YMovementData = Convert.ToInt32(XMovement.Text);
             }
+            NewPictureWidth = NewPictureWidth + XMovementData;
+            NewPictureHeight = NewPictureHeight + YMovementData;
+            Bitmap HaHaBitmap = new Bitmap(NewPictureWidth, NewPictureHeight);
+            for(int i = 0; i < NewPictureWidth; i++)
+            {
+                for(int j = 0; j < NewPictureHeight; j++)
+                {
+                    if((i - XMovementData) < 0 | (j - YMovementData < 0))
+                    {
+                        HaHaBitmap.SetPixel(i,j,Black);
+                    }
+                    else
+                    {
+                        HaHaBitmap.SetPixel(i, j, NewBitmap.GetPixel(i - XMovementData, j - YMovementData));
+                    }
+                }
+            }
             /*Send image to form2*/
             Form2 newForm = new Form2();
-            newForm.Form2GetImage(NewBitmap);
+            newForm.Form2GetImage(HaHaBitmap);
             newForm.Show();
         }
 
