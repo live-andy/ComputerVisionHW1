@@ -18,6 +18,8 @@ namespace ComputerVisionHW1
         }
         public void Form2GetImage(Bitmap InputImage)
         {
+            ResultPictureBox.Width = InputImage.Width;
+            ResultPictureBox.Height = InputImage.Height;
             ResultPictureBox.Image = InputImage;
         }
     }

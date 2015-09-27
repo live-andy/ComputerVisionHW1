@@ -72,29 +72,95 @@ namespace ComputerVisionHW1
         private void ProcessButton_Click(object sender, EventArgs e)
         {
             Bitmap OriginalBitmap = (Bitmap)MainPictureBox.Image;
-            //int XMovementData = Convert.ToInt32(XMovement.Text);
-            //int YMovementData = Convert.ToInt32(YMovement.Text);
-            double WidthData = Convert.ToDouble(WidthVariable.Text);
-            double HeightData = Convert.ToDouble(HeightVariable.Text);
-            int NewPictureWidth = Convert.ToInt32(WidthData);
-            int NewPictureHeight = Convert.ToInt32(HeightData);
-            Bitmap NewBitmap = new Bitmap(NewPictureWidth,NewPictureHeight);
-            for(int i = 0; i < NewPictureWidth; i++)
+            //拉申
+            //下面這邊要用估計(round)的 還沒寫
+            double WidthData = 1;
+            double HeightData = 1;
+            if (WidthVariable.Text != "") WidthData = Convert.ToDouble(WidthVariable.Text);
+            if(HeightVariable.Text != "") HeightData = Convert.ToDouble(HeightVariable.Text);
+            int NewPictureWidth = Convert.ToInt32(Math.Round(WidthData * OriginalBitmap.Width,0));
+            int NewPictureHeight = Convert.ToInt32(Math.Round(HeightData * OriginalBitmap.Height,0));
+            double OriginalX;
+            double OriginalY;
+            Bitmap NewBitmap = new Bitmap(NewPictureWidth, NewPictureHeight);
+            for (int i = 0; i < NewPictureWidth; i++)
             {
-                for(int j = 0; j < NewPictureHeight; j++)
+                for (int j = 0; j < NewPictureHeight; j++)
                 {
-                    Color OriginalColor = OriginalBitmap.GetPixel(i, j);
+                    OriginalX = i / WidthData;
+                    OriginalY = j / HeightData;
+                    /*
+                    Color LeftUp = OriginalBitmap.GetPixel(Convert.ToInt32(Math.Floor(OriginalX)), Convert.ToInt32(Math.Floor(OriginalY)));
+                    Color LeftDown = OriginalBitmap.GetPixel(Convert.ToInt32(Math.Floor(OriginalX)), Convert.ToInt32(Math.Ceiling(OriginalY)));
+                    Color RightUp = OriginalBitmap.GetPixel(Convert.ToInt32(Math.Ceiling(OriginalX)), Convert.ToInt32(Math.Floor(OriginalY)));
+                    Color RightDown = OriginalBitmap.GetPixel(Convert.ToInt32(Math.Ceiling(OriginalX)), Convert.ToInt32(Math.Ceiling(OriginalY)));
+                    */
+                    Color OriginalColor = OriginalBitmap.GetPixel(Convert.ToInt32(Math.Floor(OriginalX)), Convert.ToInt32(Math.Floor(OriginalY)));
                     /*int Red = OriginalColor.R;
                     int Green = OriginalColor.G;
                     int Blue = OriginalColor.B;*/
                     //NewBitmap.SetPixel(i,j, Color.FromArgb(avg1, avg1, avg1)));
                     NewBitmap.SetPixel(i, j, OriginalColor);
-        }
+                }
+            }
+            //旋轉
+
+
+            //平移
+            int XMovementData;
+            int YMovementData;
+            if (XMovement.Text != "")
+            {
+                XMovementData = Convert.ToInt32(XMovement.Text);
+            }
+            if (YMovement.Text != "")
+            {
+                YMovementData = Convert.ToInt32(XMovement.Text);
             }
             /*Send image to form2*/
             Form2 newForm = new Form2();
             newForm.Form2GetImage(NewBitmap);
             newForm.Show();
+        }
+
+        private void XMovement_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (((int)e.KeyChar < 48 | (int)e.KeyChar > 57) & (int)e.KeyChar != 8)  //force user to enter numbers
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void YMovement_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (((int)e.KeyChar < 48 | (int)e.KeyChar > 57) & (int)e.KeyChar != 8)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void WidthVariable_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (((int)e.KeyChar < 48 | (int)e.KeyChar > 57) & (int)e.KeyChar != 8 & (int)e.KeyChar != 46)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void HeightVariable_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (((int)e.KeyChar < 48 | (int)e.KeyChar > 57) & (int)e.KeyChar != 8 & (int)e.KeyChar != 46)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void RotateVariable_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (((int)e.KeyChar < 48 | (int)e.KeyChar > 57) & (int)e.KeyChar != 8)
+            {
+                e.Handled = true;
+            }
         }
     }
 }

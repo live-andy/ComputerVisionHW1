@@ -98,6 +98,7 @@
             this.WidthVariable.Name = "WidthVariable";
             this.WidthVariable.Size = new System.Drawing.Size(56, 20);
             this.WidthVariable.TabIndex = 4;
+            this.WidthVariable.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.WidthVariable_KeyPress);
             // 
             // HeighVariableLabel
             // 
@@ -116,6 +117,7 @@
             this.HeightVariable.Name = "HeightVariable";
             this.HeightVariable.Size = new System.Drawing.Size(56, 20);
             this.HeightVariable.TabIndex = 6;
+            this.HeightVariable.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.HeightVariable_KeyPress);
             // 
             // RotateVariable
             // 
@@ -123,6 +125,7 @@
             this.RotateVariable.Name = "RotateVariable";
             this.RotateVariable.Size = new System.Drawing.Size(56, 20);
             this.RotateVariable.TabIndex = 7;
+            this.RotateVariable.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.RotateVariable_KeyPress);
             // 
             // RotateVariableLable
             // 
@@ -171,6 +174,7 @@
             this.XMovement.Name = "XMovement";
             this.XMovement.Size = new System.Drawing.Size(55, 20);
             this.XMovement.TabIndex = 12;
+            this.XMovement.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.XMovement_KeyPress);
             // 
             // YMovement
             // 
@@ -178,6 +182,7 @@
             this.YMovement.Name = "YMovement";
             this.YMovement.Size = new System.Drawing.Size(55, 20);
             this.YMovement.TabIndex = 13;
+            this.YMovement.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.YMovement_KeyPress);
             // 
             // Form1
             // 
