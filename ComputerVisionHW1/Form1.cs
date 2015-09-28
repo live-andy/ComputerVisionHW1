@@ -72,8 +72,8 @@ namespace ComputerVisionHW1
         private void ProcessButton_Click(object sender, EventArgs e)
         {
             Bitmap OriginalBitmap = (Bitmap)MainPictureBox.Image;
+            Color Black = Color.FromArgb(0, 0, 0);
             //拉申
-            //下面這邊要用估計(round)的 還沒寫
             double WidthData = 1;
             double HeightData = 1;
             if (WidthVariable.Text != "") WidthData = Convert.ToDouble(WidthVariable.Text);
@@ -89,17 +89,7 @@ namespace ComputerVisionHW1
                 {
                     OriginalX = i / WidthData;
                     OriginalY = j / HeightData;
-                    /*
-                    Color LeftUp = OriginalBitmap.GetPixel(Convert.ToInt32(Math.Floor(OriginalX)), Convert.ToInt32(Math.Floor(OriginalY)));
-                    Color LeftDown = OriginalBitmap.GetPixel(Convert.ToInt32(Math.Floor(OriginalX)), Convert.ToInt32(Math.Ceiling(OriginalY)));
-                    Color RightUp = OriginalBitmap.GetPixel(Convert.ToInt32(Math.Ceiling(OriginalX)), Convert.ToInt32(Math.Floor(OriginalY)));
-                    Color RightDown = OriginalBitmap.GetPixel(Convert.ToInt32(Math.Ceiling(OriginalX)), Convert.ToInt32(Math.Ceiling(OriginalY)));
-                    */
                     Color OriginalColor = OriginalBitmap.GetPixel(Convert.ToInt32(Math.Floor(OriginalX)), Convert.ToInt32(Math.Floor(OriginalY)));
-                    /*int Red = OriginalColor.R;
-                    int Green = OriginalColor.G;
-                    int Blue = OriginalColor.B;*/
-                    //NewBitmap.SetPixel(i,j, Color.FromArgb(avg1, avg1, avg1)));
                     NewBitmap.SetPixel(i, j, OriginalColor);
                 }
             }
@@ -108,7 +98,9 @@ namespace ComputerVisionHW1
             if (RotateVariable.Text != "")
             {
                 int SafeWidth = NewPictureWidth;
+                int OriXMid = SafeWidth / 2;
                 int SafeHeight = NewPictureHeight;
+                int OriYMid = SafeHeight / 2;
                 int theta = Convert.ToInt32(RotateVariable.Text);
                 int XOffset;    //X補正量
                 int YOffset;    //Y補正量
@@ -121,10 +113,20 @@ namespace ComputerVisionHW1
                 int SmallestY;  //最小Y
                 int GreatX; //最大X
                 int GreatY; //最大Y
-                //X
+                //右上點的新座標
                 int XofRightTop = Convert.ToInt32(Math.Floor(NewPictureWidth * CosTheta));
+                int YofRightTop = Convert.ToInt32(Math.Floor(NewPictureWidth * SinTheta));
+                //MessageBox.Show("("+ XofRightTop.ToString()+ ","+ YofRightTop.ToString()+ ")");
+                //左下點的新座標
                 int XofLeftDown = Convert.ToInt32(Math.Floor(-NewPictureHeight * SinTheta));
+                int YofLeftDown = Convert.ToInt32(Math.Floor(NewPictureHeight * CosTheta));
+                //MessageBox.Show("("+ XofLeftDown.ToString()+ ","+ YofLeftDown.ToString()+ ")");
+                //右下點的新座標
                 int XofRightDown = Convert.ToInt32(Math.Floor(NewPictureWidth * CosTheta - NewPictureHeight * SinTheta));
+                int YofRightDown = Convert.ToInt32(Math.Floor(NewPictureWidth * SinTheta + NewPictureHeight * SinTheta));
+                //MessageBox.Show("("+ XofRightDown.ToString()+ ","+ YofRightDown.ToString()+ ")");
+
+                //找最大及最小X
                 SmallestX = 0;
                 if (SmallestX > XofRightTop) SmallestX = XofRightTop;
                 if (SmallestX > XofLeftDown) SmallestX = XofLeftDown;
@@ -133,10 +135,7 @@ namespace ComputerVisionHW1
                 if (GreatX < XofRightTop) GreatX = XofRightTop;
                 if (GreatX < XofLeftDown) GreatX = XofLeftDown;
                 if (GreatX < XofRightDown) GreatX = XofRightDown;
-                //Y
-                int YofRightTop = Convert.ToInt32(Math.Floor(NewPictureWidth * SinTheta));
-                int YofLeftDown = Convert.ToInt32(Math.Floor(NewPictureHeight * CosTheta));
-                int YofRightDown = Convert.ToInt32(Math.Floor(NewPictureWidth * SinTheta + NewPictureHeight * SinTheta));
+                //找最大及最小Y
                 SmallestY = 0;
                 if (SmallestY > YofRightTop) SmallestY = YofRightTop;
                 if (SmallestY > YofLeftDown) SmallestY = YofLeftDown;
@@ -148,11 +147,12 @@ namespace ComputerVisionHW1
                 NewPictureWidth = GreatX - SmallestX;
                 NewPictureHeight = GreatY - SmallestY;
                 HeHeBitmap = new Bitmap(NewPictureWidth, NewPictureHeight);
+                /*
                 if(0 <= theta & theta <= 90)
                 {
                     XOffset = 0;
-                    YOffset = Math.Abs(0 - SmallestY);
-                    MessageBox.Show(YOffset.ToString() + "  " + SmallestY.ToString());
+                    YOffset = Math.Abs(0 - YofRightTop);
+                    MessageBox.Show(YOffset.ToString() + "  " + YofRightTop.ToString());
 
                     
                 }
@@ -166,18 +166,57 @@ namespace ComputerVisionHW1
                     XOffset = Math.Abs(0 - SmallestX);
                     YOffset = 0;
                 }
+                */
+                //往回位移量 = 新陣列中心點旋轉前 - 舊陣列中心點
+                XOffset = -Convert.ToInt32(Math.Floor((NewPictureWidth / 2) * CosTheta)) + Convert.ToInt32(Math.Floor((NewPictureHeight / 2) * SinTheta)) + OriXMid;
+                YOffset = -Convert.ToInt32(Math.Floor((NewPictureWidth / 2) * SinTheta)) - Convert.ToInt32(Math.Floor((NewPictureHeight / 2) * CosTheta)) + OriYMid;
                 for (int i = 0; i < NewPictureWidth; i++)
                 {
                     for(int j = 0; j < NewPictureHeight; j++)
                     {
-                        int OriginalXPos = Convert.ToInt32(Math.Floor((i-XOffset) * CosTheta - (j - YOffset) * SinTheta));
-                        int OriginalYPos = Convert.ToInt32(Math.Floor((i-XOffset) * SinTheta + (j - YOffset) * CosTheta));
-                        if(OriginalXPos >= 0 & OriginalXPos < SafeWidth & OriginalYPos >= 0 & OriginalYPos < SafeHeight)
+                        if(Resize.Checked == false)
                         {
-                            HeHeBitmap.SetPixel(i, j, NewBitmap.GetPixel(OriginalXPos, OriginalYPos));
+                            int OriginalXPos = Convert.ToInt32(Math.Floor((i - OriXMid) * CosTheta - (j - OriYMid) * SinTheta)) + OriXMid;
+                            int OriginalYPos = Convert.ToInt32(Math.Floor((i - OriXMid) * SinTheta + (j - OriYMid) * CosTheta)) + OriYMid;
+                            if (OriginalXPos >= 0 & OriginalXPos < SafeWidth & OriginalYPos >= 0 & OriginalYPos < SafeHeight)
+                            {
+                                HeHeBitmap.SetPixel(i, j, NewBitmap.GetPixel(OriginalXPos, OriginalYPos));
+                            }
+                            else
+                            {
+                                HeHeBitmap.SetPixel(i, j, Black);
+                            }
                         }
+                        else
+                        {
+                            int OriginalXPos = Convert.ToInt32(Math.Floor((i) * CosTheta - (j) * SinTheta)) + XOffset;
+                            int OriginalYPos = Convert.ToInt32(Math.Floor((i) * SinTheta + (j) * CosTheta)) + YOffset;
+                            if (OriginalXPos >= 0 & OriginalXPos < SafeWidth & OriginalYPos >= 0 & OriginalYPos < SafeHeight)
+                            {
+                                HeHeBitmap.SetPixel(i, j, NewBitmap.GetPixel(OriginalXPos, OriginalYPos));
+                            }
+                            else
+                            {
+                                HeHeBitmap.SetPixel(i, j, Black);
+                            }
+                        }
+                        
+                        
+                        
                     }
                 }
+                /*for(int i = 0; i < SafeWidth; i++)
+                {
+                    for(int j = 0; j < SafeHeight; j++)
+                    {
+                        int NewXPos = Convert.ToInt32(Math.Floor(i * CosTheta + j* SinTheta));
+                        int NewYPos = Convert.ToInt32(Math.Floor(-i * SinTheta + j * CosTheta));
+                        if (NewXPos >= 0 & NewXPos < NewPictureWidth & NewYPos >= 0 & NewYPos < NewPictureHeight)
+                        {
+                            HeHeBitmap.SetPixel(NewXPos, NewYPos, NewBitmap.GetPixel(i, j));
+                        }
+                    }
+                }*/
             }
             else
             {
@@ -186,7 +225,6 @@ namespace ComputerVisionHW1
             //平移
             int XMovementData = 0;
             int YMovementData = 0;
-            Color Black = Color.FromArgb(255, 255, 255);
             if (XMovement.Text != "")
             {
                 XMovementData = Convert.ToInt32(XMovement.Text);

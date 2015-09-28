@@ -44,6 +44,7 @@
             this.XMovement = new System.Windows.Forms.TextBox();
             this.YMovement = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.Resize = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.MainPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             this.SuspendLayout();
@@ -141,7 +142,7 @@
             // ProcessButton
             // 
             this.ProcessButton.Font = new System.Drawing.Font("Microsoft JhengHei", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ProcessButton.Location = new System.Drawing.Point(13, 334);
+            this.ProcessButton.Location = new System.Drawing.Point(13, 368);
             this.ProcessButton.Name = "ProcessButton";
             this.ProcessButton.Size = new System.Drawing.Size(163, 46);
             this.ProcessButton.TabIndex = 9;
@@ -194,11 +195,22 @@
             this.label3.TabIndex = 14;
             this.label3.Text = "。";
             // 
+            // Resize
+            // 
+            this.Resize.AutoSize = true;
+            this.Resize.Location = new System.Drawing.Point(17, 336);
+            this.Resize.Name = "Resize";
+            this.Resize.Size = new System.Drawing.Size(98, 17);
+            this.Resize.TabIndex = 16;
+            this.Resize.Text = "大小補正處理";
+            this.Resize.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(912, 445);
+            this.Controls.Add(this.Resize);
             this.Controls.Add(this.RotateVariable);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.YMovement);
@@ -242,6 +254,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.CheckBox Resize;
     }
 }
 
