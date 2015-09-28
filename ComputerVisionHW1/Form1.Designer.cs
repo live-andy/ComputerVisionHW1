@@ -43,6 +43,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.XMovement = new System.Windows.Forms.TextBox();
             this.YMovement = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.MainPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             this.SuspendLayout();
@@ -123,7 +124,7 @@
             // 
             this.RotateVariable.Location = new System.Drawing.Point(120, 299);
             this.RotateVariable.Name = "RotateVariable";
-            this.RotateVariable.Size = new System.Drawing.Size(56, 20);
+            this.RotateVariable.Size = new System.Drawing.Size(45, 20);
             this.RotateVariable.TabIndex = 7;
             this.RotateVariable.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.RotateVariable_KeyPress);
             // 
@@ -184,18 +185,28 @@
             this.YMovement.TabIndex = 13;
             this.YMovement.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.YMovement_KeyPress);
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(161, 290);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(19, 13);
+            this.label3.TabIndex = 14;
+            this.label3.Text = "。";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(912, 445);
+            this.Controls.Add(this.RotateVariable);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.YMovement);
             this.Controls.Add(this.XMovement);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.ProcessButton);
             this.Controls.Add(this.RotateVariableLable);
-            this.Controls.Add(this.RotateVariable);
             this.Controls.Add(this.HeightVariable);
             this.Controls.Add(this.HeighVariableLabel);
             this.Controls.Add(this.WidthVariable);
@@ -230,6 +241,7 @@
         private System.Windows.Forms.TextBox XMovement;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label3;
     }
 }
 
